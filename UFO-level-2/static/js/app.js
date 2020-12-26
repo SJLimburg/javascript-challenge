@@ -1,54 +1,51 @@
 //  Assign the data from `data.js` to a descriptive variable
-var tableData = data;
-// MY CODE Next
-
+let tableData = data;
 // Get a reference to the table body 
-var tbody = d3.select("tbody");
-// let table = d3.select("table");
-
-// Select the button  and the form
-var button = d3.select("#filter-btn");
-var form = d3.select("#datetime");
-
+let tbody = d3.select("tbody");
+// let table = d3.select("table") - not neded - kept to remind me
 
 //  Loop Through `data` and console.log each UFO report object
-function createTable(tableData){
+function createTable(data){
     // Clear out any existing data in the table
     tbody.html("");
+
+
     //  Loop Through `data` and console.log each UFO report object
-    tableData.forEach(item => {
-        // console.log(item)
-    // Step 2:  Use d3 to append one table row `tr` for each UFO report object
-        let row = tbody.append("tr");
-    // Loop through each field in the row and add the values
-        row.append("td").text(item.datetime)
-        row.append("td").text(item.city)
-        row.append("td").text(item.state)
-        row.append("td").text(item.country)
-        row.append("td").text(item.shape)
-        row.append("td").text(item.durationMinutes)
-        row.append("td").text(item.comments)
-        }
-    );
- };
+    data.forEach((item) => {
+        let row =tbody.append("tr");
 
-// Create event handlers 
-button.on("click", runEnter);
-form.on("submit", runEnter);
+        
+// loop through every field in the item to add the value to the table row
+        Object.values(item).forEach(val) =>{
+        let cellData = row.append("td");
+        cellData.text(val);
+      });
+    });
+ }
 
-// Complete the event handler function for the form
-function runEnter() {
+function handleClick() {
     // Prevent the page from refreshing
     d3.event.preventDefault();
-    
+
     // Select the input element and get the raw HTML node and get the value property from it
-    var inputValue = d3.select("#datetime").property("value")
-    var filteredData = tableData.filter(row => row.datetime === inputValue);
-    
+    let inputDate = d3.select("#datetime").property("value")
+    let filteredData = tableData
+
+    // Check to see if a date was entered
+
+    if (inputDate) {  
+        //  filter table data based on the date
+
+        filteredData = filteredData.filter(row => row.datetime === inputDate);
+        }
+        
     createTable(filteredData);
-    console.log(inputValue);
-    console.log(filteredData)
-};
+}
+
+// Create event handlers 
+// Select the button  and the form
+d3.select("#filter-btn").on("click", handleClick);
+d3.select("#datetime").on("submit", handleClick);
 
 // load all without filter on page opening
 createTable(tableData);
