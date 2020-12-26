@@ -22,34 +22,37 @@ function createTable(data){
         });
     });
 }
-// Create a list of filters - first  create the filter variable
-let filters={};
+// Create a list of filters - first  create the filter variable and empty array
+let filters = {};
 // create a function to update the filters
-function updateFilters(){
-    // Record the element, value and id of a filter that is changed
+function updateFilters() {
+
+    // Save the element, value, and id of the filter that was changed by user
     let changedElement = d3.select(this).select("input");
     let elementValue = changedElement.property("value");
     let filterId = changedElement.attr("id");
-
-    // If a filter value is entered - add the vlue and filterId to the list
-    // if there is no input for a given filter - clear it from the filter list
-    if(elementValue){
-        filters[filterId] = elementValue;
+  
+    // If a filter value was entered then add that filterId and value to the filters list.
+    //  Else, clear that filter from the filters object
+    if (elementValue) {
+      filters[filterId] = elementValue;
     }
-    else{
-        delete filters[filterId];
+    else {
+      delete filters[filterId];
     }
-    // call the function to build the fully filtered table
+  
+    // Call function to apply all filters and rebuild the table
     filterTable();
-}
+  
+  }
 
 function filterTable() {
     // Start with filtered data as table data
     let filteredData = tableData;
 
     // use Object.entries to return the array of key-value pairs
-    // that match the filter values
-    Object.entries(filters).forEach(([key,vlaue])=>{
+    // check to see which that match the filter user input values
+    Object.entries(filters).forEach(([key,value]) => {
         filteredData = filteredData.filter(row => row[key] === value);
     });
 
@@ -57,8 +60,8 @@ function filterTable() {
     createTable(filteredData);
 }
 
-// Create the event listener to see when the form button is clicked
-d3.selectAll(".filter").on("change",updateFilters);
+// Create the event listener to see when the form filter is changed
+d3.selectAll(".filter").on("change", updateFilters);
 
-// Build the table when the page loads
+// Build the table when the page loads or when all user filters are cleared
 createTable(tableData);
