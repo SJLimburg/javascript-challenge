@@ -6,14 +6,14 @@
 
 Create a basic HTML web page, use the UFO dataset provided to create a table of UFO sightings.  
 coulnUse javascript and d3.js to read the data and write it to a table on the webpage.
- >> Columns reported to include:
- - Date
- - City
- - State
- - Country
- - Shape (of UFO)
- - Duration	(of sighting)
- - Comments
+    Columns reported to include:
+  - Date
+  - City
+  - State
+  - Country
+  - Shape (of UFO)
+  - Duration	(of sighting)
+  - Comments
 
 Take a user inputted date and return all records that match that date. For this task a date outside of the given range will reuturn an empty table.
 
@@ -21,10 +21,10 @@ Take a user inputted date and return all records that match that date. For this 
 
 Take the data from part one and update the HTML form to allow multiple user inputs.
 
- >> Available user inputs include:
- - Date
- - City
- - State
- - Country
- - Shape (of UFO)
- 
+    Available user inputs include:
+  - Date
+  - City
+  - State
+  - Country
+  - Shape (of UFO)
+
