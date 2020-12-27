@@ -22,7 +22,7 @@ Take a user inputted date and return all records that match that date. For this 
 
 Take the data from part one and update the HTML form to allow multiple user inputs.
 
-    > Available user inputs include:
+     Available user inputs include:
   - Date
   - City
   - State
